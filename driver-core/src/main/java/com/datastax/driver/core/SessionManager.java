@@ -715,6 +715,8 @@ class SessionManager extends AbstractSession {
       if (entry.getKey().getSocketAddress().equals(toExclude)) continue;
 
       try {
+        System.err.println(
+            "Preparing statement " + statement + " with routing key " + statement.getRoutingKey());
         // Preparing is not critical: if it fails, it will fix itself later when the user tries to
         // execute
         // the prepared query. So don't wait if no connection is available, simply abort.

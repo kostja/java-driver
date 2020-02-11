@@ -400,9 +400,13 @@ class HostConnectionPool implements Connection.Owner {
         Metadata metadata = manager.cluster.getMetadata();
         Token t = metadata.newToken(routingKey);
         shardId = host.getShardingInfo().shardId(t);
+        System.err.println("Using shard awareness for token " + t + " targeting shard " + shardId);
       } else {
+        System.err.println("No routing key using random shard");
         shardId = RAND.nextInt(host.getShardingInfo().getShardsCount());
       }
+    } else {
+      System.err.println("Host has no sharding info: " + host);
     }
 
     Connection leastBusy = null;

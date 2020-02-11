@@ -396,6 +396,8 @@ class RequestHandler {
       ProtocolVersion protocolVersion = manager.cluster.manager.protocolVersion();
       CodecRegistry codecRegistry = manager.cluster.manager.configuration.getCodecRegistry();
       ByteBuffer routingKey = statement.getRoutingKey(protocolVersion, codecRegistry);
+      System.err.println(
+          "Borrowing connection for statement " + statement + " with routing key " + routingKey);
 
       PoolingOptions poolingOptions = manager.configuration().getPoolingOptions();
       ListenableFuture<Connection> connectionFuture =
